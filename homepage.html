@@ -1,0 +1,88 @@
+ {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/header.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/post.css'%}">
+
+</head>
+<body>
+  <!..   header                        ..!>
+	<div class="navbar">
+		<div class="left">
+
+		<div class="navbar1">
+			<input type="text" name="search" style="width: 300px;height: 30px;" placeholder="Enter name to search">
+			<input type="submit" name="" value="search">
+
+		</div>
+
+		</div>
+
+		<div class="right">
+		<div class="navbar3">
+			<a href="http://127.0.0.1:8000/addpost/"><i class="fas fa-home"></i>Add New Post </i></a></div>
+		<div class="navbar3"><a href="#"><i class="fas fa-plus"></i>My Profile</a></div>
+		<div>
+		<a href="#">Back</a>
+		</div>
+		<div class="download">
+			<a href="#">Download</a>
+		</div>
+	</div>
+		</div>
+
+
+    <!..   header end                    ..!>
+
+		<!..   Main page  ..!>
+		<div style="width:100%; float:top;">
+		<div class="left1">
+                <p>UserId  <img src="homer.png" style="width: 30px; height:35px; border-radius: 15px; border-color: black; margin-top: auto;  " alt="image"> </p>
+
+                <p style="font-family: verdana;"><i class="fas fa-newspaper"></i>..News Feed..</p><br>
+
+                <p style="font-family: verdana;"><i class="fab fa-facebook-messenger"></i>..Messenger..</p><br>
+
+                <p style="font-family: verdana;"><i class="fas fa-columns"></i>..Pages..</p><br>
+
+                <p style="font-family: verdana;"><i class="fas fa-users"></i>..Groups..</p>     <br>
+        <p style="font-family: verdana;"><a href="http://127.0.0.1:8000/addfriend/"><i class="fas fa-user-alt"></i>..Add Friends..</a><\p>
+			</div>
+
+		<!.. post template  ..!>
+		<div class="middle1">
+    {% for b in posts %}
+				<div class="div21">
+
+                <div class="div211">
+                    <img src="{{b.userid.displayimage}}" style="height: 30px; width: 30px; border:1px solid rgba(10, 0, 0,0.1); border-radius: 5px;">
+                    <b style="color:rgb(23, 183, 164);font-family: verdana;">{{b.userid.firstname }}{{b.userid.lastname}}</b> <i>felling </i><b>{{b.activity}}</b><i>at </i><b>{{b.location}}</b><br>
+                    <i style="font-size:10px;">{{b.date}}</i><br>
+                    <span>{{b.posttitle}} </span>
+                </div>
+
+                <div class="div212">
+                  <a href="http://127.0.0.1:8000/viewpost/{{b.id}}" ><img src="{{b.postimage}}" class="postimage"></a>
+                </div>
+
+        </div>
+      {% endfor %}
+		</div>
+		<!.. post template end ..!>
+			<div class="right1">
+                <div class="stories"><p style="font-family: verdana;">STORIES</p>
+                <img src="#" style="height: 35px; width: 30px; border-radius: 20px;" alt="No story to show" >
+                </div>
+                                <hr>
+
+                <div class="online"><p style="font-family: verdana;">ONLINE</p>
+		               <img src="#" style="height: 35px; width: 30px; border-radius: 20px;" alt="No Friend Online" >
+								 </div>
+			</div>
+		</div>
+
+	</body>
+</html>

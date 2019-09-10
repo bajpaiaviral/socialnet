@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>post</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{%static 'css/header.css'%}">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% load static %}
+<!..   header                        ..!>
+<div class="navbar">
+	<div class="left">
+
+	<div class="navbar1">
+		<input type="text" name="search" style="width: 300px;height: 30px;" placeholder="Enter name to search">
+		<input type="submit" name="" value="search">
+
+	</div>
+
+	</div>
+
+	<div class="right">
+	<div class="navbar3">
+		<a href="#"><i class="fas fa-home"></i>My Profile </i></a></div>
+	<div class="navbar3"><a href="http://127.0.0.1:8000/profile"><i class="fas fa-plus"></i>Home </i></a></div>
+	<div>
+	<a href="#">Logout</a>
+	</div>
+	<div class="download">
+		<a href="#">Download</a>
+	</div>
+</div>
+	</div>
+</div>
+
+	<!..   header end                    ..!>
+
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6  bg-success">
+			<h1 align="center"> create a post</h1>
+			<form action="#" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="form-group">
+
+
+					<label>Title:</label>
+					 <input type="text" class="form-control form-control-sm" name="posttitle">
+
+					<label>Image :</label>
+					 <input type="file"  name="postimage"><br>
+
+					<label>location: </label>
+					<input type="text" class="form-control form-control-sm" name="location">
+
+					<label>how are you felling:</label>
+					<select name="activity" class="form-control form-control-sm">
+						<option>Sad </option>
+						<option>happy </option>
+						<option>Enjoying </option>
+						<option>Travelling</option>
+						<option>Playing</option>
+						<option>studying</option>
+					</select>
+					<input type="submit" value="post" >
+				</div>
+
+			</form>
+		</div>
+		<div class="col-sm-3"></div>
+	</div>
+
+
+
+</body>
+</html>

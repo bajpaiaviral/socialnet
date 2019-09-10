@@ -1,0 +1,167 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add friends</title>
+    <link rel="stylesheet" href ="{% static 'css/addfriend.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{%static 'css/header.css'%}">
+
+  </head>
+
+  <body>
+<script>
+  // let b = ''
+    function sendRequest(a){
+      // console.log(a);
+      // b = a
+      fetch("/requestsent/", {
+          method: "POST",
+          body: JSON.stringify({'data': a.value}),
+          //body: a.value,
+          credentials: "same-origin",
+          headers: new Headers({
+            "X-CSRFToken": getToken(),
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "X-Requested-With": "XMLHttpRequest"
+          })
+        })
+        .then(res => res.json())
+        .then(result =>{
+          if (result.result === true){
+            a.parentElement.parentElement.remove()          
+          }
+        })
+    }
+    function acceptRequest(a){
+      console.log(a);
+      fetch("/acceptrequest/", {
+          method: "POST",
+          body: JSON.stringify({'data': a.value}),
+          //body: a.value,
+          credentials: "same-origin",
+          headers: new Headers({
+            "X-CSRFToken": getToken(),
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "X-Requested-With": "XMLHttpRequest"
+          })
+        })
+        .then(res => res.json())
+        .then(result =>{
+          if(result.result===true){
+            a.parentElement.parentElement.remove()
+          }
+        })
+    }
+    function cancelRequest(a){
+      console.log(a);
+      fetch("/cancelrequest/", {
+          method: "POST",
+          body: JSON.stringify({'data': a.value}),
+          //body: a.value,
+          credentials: "same-origin",
+          headers: new Headers({
+            "X-CSRFToken": getToken(),
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "X-Requested-With": "XMLHttpRequest"
+          })
+        })
+        .then(res => res.json())
+        .then(result =>{
+          if(result.result===true){
+            
+            a.parentElement.parentElement.remove()
+          }
+        })
+    }
+
+    function getToken(){
+        let cok = document.cookie.split(";")
+        let csrftoken = ''
+        for(let i =0;i<cok.length;i++){
+          if(cok[i].split('=')[0].trim() === 'csrftoken'){
+            csrftoken = cok[i].split('=')[1]
+          }
+        }
+        return csrftoken
+      }
+</script>
+
+<!--   ........................header  start.......................                -->
+<div class="navbar">
+	<div class="left">
+
+	<div class="navbar1">
+		<input type="text" name="search" style="width: 300px;height: 30px;" placeholder="Enter name to search">
+		<input type="submit" name="" value="search">
+
+	</div>
+
+	</div>
+
+	<div class="right">
+	<div class="navbar3">
+		<a href="#"><i class="fas fa-home"></i>My Profile </i></a></div>
+	<div class="navbar3"><a href="http://127.0.0.1:8000/homepage"><i class="fas fa-plus"></i>Home </i></a></div>
+	<div>
+	<a href="#">Logout</a>
+	</div>
+	<div class="download">
+		<a href="#">Download</a>
+	</div>
+</div>
+	</div>
+</div>
+
+	<!-- <!..   header end                    ..!> -->
+
+  <!-- send friend request start here-->
+
+<div >
+    <div class="sendrequest" >
+      <h1>request send from here </h1>
+    {% for i in friend %}
+    {%if i.emailid != request.session.name %}
+          <div class="friend ">
+            <div style="float:left;"><img src="{{i.displayimage}}" alt="image not found" class="profile" /></div>
+            <div style="float:left;padding-left:10px;"> <a href="#" style="font-family:verdana;text-decoration:none;" >{{i.firstname}}{{i.lastname}}</a> </div><br><br>
+            <div>
+              <button class="disableBtn " value="{{ i.emailid }}" onclick="sendRequest(this)">Send Request</button>
+            </div>
+            </div>
+         {%endif%}
+         <br>
+    {%endfor%}
+  </div> 
+   <!-- send friend request end here -->
+
+   <!-- Accept friend request start here -->
+    <div  class="acceptrequest"> 
+        <h1>confirm Request</h1>
+        {% for i in accept %}
+        {%if i.reqstatus == '1'%}
+        <div class="friendright">
+          <div style="float:left"> <img src="{{i.sender.displayimage}}" alt="image not found" class="profile"></div> 
+          <div style="float:left;padding-left:10px;"><a href="#" style="font-family:verdana;text-decoration: none;">{{i.sender.firstname}}{{i.sender.lastname}}</a></div><br><br>
+          <div>
+            <button class="disableBtn"
+              value="{{ i.sender.emailid }}"
+              onclick="acceptRequest(this)"
+            >
+              confirm request
+            </button>
+        
+            <button class="disableBtn" onclick="cancelRequest(this)" value={{i.sender.emailid}}>Cancel request</button>
+          </div>
+        </div>
+         {%endif%}
+         <br>
+        {%endfor%}
+      </div>
+      <!-- Accept friend request end here -->
+
+    </div>
+
+  
+  </body>
+</html>

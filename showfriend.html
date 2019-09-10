@@ -1,0 +1,32 @@
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href ="{% static 'css/addfriend.css' %}" />
+
+</head>
+<body>
+    <div class="sendrequest" >
+        <h1>friends </h1>
+      {% for i in friend %}
+     
+            <div class="friend ">
+              <div style="float:left;"><img src="{{i.displayimage}}" alt="image not found" class="profile" /></div>
+              <div style="float:left;padding-left:10px;"> <a href="#" style="font-family:verdana;text-decoration:none;" >{{i.firstname}}{{i.lastname}}</a> </div><br><br>
+              <div>
+                <form action="http://127.0.0.1:8000/chatting">
+                  <button class="disableBtn " value="{{ i.emailid }}" >Chat</button>
+                </form>
+              </div>
+              </div>
+           
+           <br>
+      {%endfor%}
+    </div> 
+</body>
+</html>

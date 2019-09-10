@@ -1,0 +1,21 @@
+<html>
+
+<head>
+
+    <title>chats</title>
+</head>
+<body>
+<div>
+    {%for  i in chattext%}
+    <div style="border:1px solid black;">
+    <img src="{{i.userid.displayimage}}" alt="image not available" style="width:30px;height:30px;display:in-line;">
+    <h3 style="color:rgb(23, 183, 164);font-family: verdana; display:inline;">{{i.userid.firstname}} {{i.userid.lastname}}</h3><br>
+    <i style="font-size:10px;">{{i.date}}</i>
+    <p>{{i.commenttext}}</p>
+  </div>
+  <br>
+{% endfor %}
+</div>
+</body>
+
+</html>

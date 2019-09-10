@@ -1,0 +1,58 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> view post </title>
+    <link rel="stylesheet" type="text/css" href="{%static 'css/post.css'%}">
+
+
+    </style>
+  </head>
+  <body>
+<div class="main">
+  <div class="middle1">
+    <div class="div21">
+
+            <div class="div211">
+                <img src="{{b.userid.displayimage}}" style="height: 30px; width: 30px; border:1px solid rgba(10, 0, 0,0.1); border-radius: 5px;">
+                <b style="color:rgb(23, 183, 164);font-family: verdana;">{{b.userid.firstname}} {{b.userid.lastname}}</b> <i>felling </i><b>{{b.activity}}</b><i>at </i><b>{{b.location}}</b><br>
+                <i style="font-size:10px;">{{b.date}}</i> <br>
+                <span>{{b.posttitle}} </span>
+            </div>
+
+            <div class="div212">
+              <img src="{{b.postimage}}" class="postimage">
+            </div>
+      </div>
+  </div>
+  <div class="lico" >
+    <form method="POST" action="http://127.0.0.1:8000/like/{{b.id}}/">
+       {% csrf_token %}
+
+{%if like%}
+          <input type="submit" value="liked | {{nol}}" disabled>
+          {%else%}
+          <input type="submit" value="like {{nol}}" />
+          {%endif%}
+    </form>
+    <form method="POST" action="http://127.0.0.1:8000/comment/{{b.id}}/">
+       {% csrf_token %}
+       <textarea name="comment">
+       </textarea>
+      <input type="submit" value="add comment">
+
+  </form>
+{%for  i in coms%}
+    <div style="border:1px solid black;">
+    <img src="{{i.userid.displayimage}}" alt="image not available" style="width:30px;height:30px;display:in-line;">
+    <h3 style="color:rgb(23, 183, 164);font-family: verdana; display:inline;">{{i.userid.firstname}} {{i.userid.lastname}}</h3><br>
+    <i style="font-size:10px;">{{i.date}}</i>
+    <p>{{i.commenttext}}</p>
+  </div>
+  <br>
+{% endfor %}
+ </div>
+</div>
+</body>
+</html>

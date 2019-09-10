@@ -1,0 +1,48 @@
+{% load static %}
+<html>
+    <head>
+        <title> Login</title>
+        <link rel="stylesheet" type="text/css" href="{%static 'css/login.css'%}">
+    </head>
+
+    <body style="padding:0px;margin:0px;">
+        <script>
+            function errorshow(error){
+                console.log("hello");
+                if(error!=null){
+                const main = document.querySelector("#create");
+                const heading = document.getElementById("login");
+                const errorShow  = document.createElement("div");
+                errorShow.appendChild(document.createTextNode(error));
+                console.log(main);
+                main.insertBefore(errorShow,heading);
+                }
+            }
+            errorshow("{{error}}");
+        </script>
+
+        <div id="body">
+            <div id="header">
+                <div id="heading"><h1>Friends Link</h1></div>
+
+            </div>
+            <div id="img">
+                <img style="width: 50%;" src="{% static "image/logo.jpg"%}" alt="Image Not Found"/>
+            </div>
+            <div id="create">
+                <span style="font-size: 40px; text-decoration: none;" id="login"><b>Log in</b></span><br><br><br>
+
+                <form action="#" method="post">
+                {% csrf_token %}
+                <input style="width: 400px; height: 40px; border: 2px solid #DFE3EE; border-radius: 5px; margin: 2px; padding: 8px; font-size: 15px; font-family:cursive;" type="text" name="email" placeholder="userid" /><br>
+                <input style="width: 400px; height: 40px; border: 2px solid #DFE3EE; border-radius: 5px; margin: 2px; padding: 8px; font-size: 15px; font-family:cursive;" type="password" placeholder="password" name="pass" /><br><br>
+
+                    <input style="width: 200px; height: 40px; color: white; background: green; border-radius: 9px;" type="submit" name="sign" value="Login"/></form><br><br><br>
+                    <h3>{{error}}</h3>
+                            </div>
+
+                    <h1>New User? <a href="http://127.0.0.1:8000/signup">Click here to signup</h1>
+                 </div>
+        <font><p style="float: right; color: #3B5998; ">Designed By<br> Atul & Aviral Mob No - 9452698306</p></font>
+    </body>
+</html>
