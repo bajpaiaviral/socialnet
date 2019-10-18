@@ -68,8 +68,6 @@ def dp(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request,'displayp.html')
-def error(request):
-    pass
 def addpost(request):
     if request.method=='POST'  and request.FILES['postimage']:
         name = request.session['name']
